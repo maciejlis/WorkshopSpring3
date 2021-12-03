@@ -1,6 +1,13 @@
 package com.skni.workshopspring3;
 
 import java.time.LocalDate;
+
+import com.skni.workshopspring3.Entity.Course;
+import com.skni.workshopspring3.Entity.CourseTypeEnum;
+import com.skni.workshopspring3.Entity.GenderEnum;
+import com.skni.workshopspring3.Entity.Student;
+import com.skni.workshopspring3.Service.CourseService;
+import com.skni.workshopspring3.Service.StudentService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +25,7 @@ public class WorkshopSpring3Application {
 		return (args) -> {
 			Course course = courseService.addCourse("Informatyka", 3, "SGH", CourseTypeEnum.INZYNIER);
 
-			Student studentMale = studentService.addStudent(
+			Student studentMale1 = studentService.addStudent(
 					"Adam",
 					"Nowak",
 					LocalDate.of(1996, 05,10),
@@ -33,8 +40,15 @@ public class WorkshopSpring3Application {
 					GenderEnum.FEMALE,
 					course
 			);
+			Student studentFemale2 = studentService.addStudent(
+					"Anna",
+					"Kapusta",
+					LocalDate.of(1993, 10,22),
+					GenderEnum.FEMALE,
+					course
+			);
 
-			System.out.println(studentMale);
+			System.out.println(studentMale1);
 			System.out.println(studentFemale);
 
 			System.out.println(studentService.findAllByLastName("Nowak"));
@@ -43,8 +57,8 @@ public class WorkshopSpring3Application {
 			System.out.println(studentService.getStudentByGenderAndByCourseType(GenderEnum.FEMALE, CourseTypeEnum.LICENCJAT));
 
 			System.out.println(studentService.getAllStudents());
-			System.out.println(studentService.deleteStudentById(student.getId()));
-			System.out.println(studentService.getAllStudents());
+			System.out.println(studentService.deleteStudentById(studentMale1.getId()));
+			System.out.println(studentService.findStudentWhereFirstNameStartsWithA());
 
 		};
 	}
